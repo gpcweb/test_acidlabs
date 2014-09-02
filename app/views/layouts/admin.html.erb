@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Spotify | <%= @page_title || "Admin" %></title>
+    <%= javascript_include_tag  "application" %>
+    <%= stylesheet_link_tag    "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div id="header">
+      <h1>Spotify</h1>
+    </div>
+    <div id="main">
+
+      <% if !flash[:notice].blank? %>
+        <div class="notice">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      
+      <%= render(:partial => "application/menu") %> 
+
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+    <div id="footer">
+      <p id="copyright">&copy; https://github.com/gpcweb / Gabriel Poblete</p>
+    </div>
+  </body>
+</html>

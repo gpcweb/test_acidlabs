@@ -1,0 +1,11 @@
+<% @page_title = "Menu" %>
+
+<div class="menu">
+  <ul>
+    <li>Bievenido </li>
+    <li><%= link_to("Buscar en Spotify", :controller => 'search',:action => 'index') %></li>
+    <li><%= link_to("Ver todos los Artistas", :controller => 'artista', :action => 'index') %></li>
+    <li><%= link_to("Ver todos los Albums", :controller => 'album', :action => 'index') %></li>
+
+  </ul>
+</div>

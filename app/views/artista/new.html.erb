@@ -1,0 +1,28 @@
+<div class="artista new">
+  <h2>Añadir Artista al catalogo local</h2>
+
+  <%= form_for(:artista, :html => {:id => "artista_nuevo"},:url => {:action => 'create'}) do |f| %>
+
+    <table summary="Artista form fields">
+      <tr>
+        <th>Artista</th>
+        <td><%= f.text_field(:nombre) %></td>
+      </tr>
+      <tr>
+        <th>Popularidad</th>
+        <td><%= f.text_field(:popularidad) %></td>
+      </tr>
+      <tr>
+        <th>URI</th>
+        <td><%= f.text_field(:uri) %></td>
+      </tr>
+      
+</table>
+
+    <div class="form-buttons">
+      <%= submit_tag("Añadir Artista") %>
+    </div>
+
+  <% end %>
+</div>
+

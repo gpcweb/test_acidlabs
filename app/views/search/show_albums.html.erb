@@ -1,0 +1,30 @@
+<div class="album index">
+
+<h2><%= @artist_albums['name'] %></h2>
+
+<table class="listing" summary="Lista de Albums">
+	<thead>
+	    <tr class="header">
+	      <th>Album</th>
+	      <th>Artista</th>
+	      <th>Año</th>
+	      <th>URI</th>
+	      <th>Acciones</th>
+	    </tr> 
+	</thead>
+	<tbody>
+		<% @artist_albums['albums'].each do |f| %>
+			<tr>	
+			   <td> <%= truncate(f['album']['name']) %>  </td>
+			   <td> <%= f['album']['artist'] %>  </td>
+			   <td> <%= f['album']['released'] %>  </td>
+			   <td> <%= f['album']['href'] %>  </td>
+			   <td class="actions">
+		        <%= link_to("Ver Pistas", {:action => 'show_album_tracks', :uri => f['album']['href'] }, :class => 'action show') %>
+		       </td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+</div>

@@ -1,0 +1,29 @@
+ <div class="pista index">
+
+ <h2> <%= @albums_tracks['artist'] %></h2>
+ <h3> <%= @albums_tracks['name'] %></h3>
+ <h3> <%= @albums_tracks['released'] %></h3>
+
+<table class="listing" summary="Lista de Canciones">
+   <thead>
+    <tr class="header">
+      <th>Nº</th>
+      <th>Cancion</th>
+      <th>Duracion</th>
+      <th>Popularidad</th>
+    </tr>
+   </thead>
+   <tbody>
+		<% @albums_tracks['tracks'].each do |f| %>
+			<tr>	
+			   <td> <%= f['track-number'] %>  </td>
+			   <td> <%= f['name'] %>  </td>
+			   <td> <%= f['length'] %>  </td>
+			   <td> <%= number_with_precision(f['popularity'], precision: 2) %>  </td>
+			   
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+</div>

@@ -1,0 +1,24 @@
+<div class="artista index">
+  <h2>Listado de Artistas</h2>
+
+  <table class="listing" summary="Lista de Artistas">
+    <tr class="header">
+      <th>&nbsp;</th>
+      <th>Artista</th>
+      <th>URI</th>
+      <th>Popularidad</th>
+      <th>Acciones</th>
+    </tr>
+    <% @artistas.each do |artista| %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%=  artista.id %></td>
+      <td><%=  artista.nombre %></td>
+      <td><%=  artista.uri %></td>
+      <td><%=  artista.popularidad %></td>
+      <td class="actions">
+            <%= link_to("Ver Albums", {:controller => 'album', :action => 'album_byartist', :id => artista.id }, :class => 'action show') %>
+           </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
