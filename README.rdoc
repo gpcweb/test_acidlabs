@@ -36,7 +36,6 @@ MEJORAS
 
 Como futuras mejoras se tiene en mente redefinir application_controller.rb de la siguiente manera:
 
-private
 
   def confirm_service(response)
 
@@ -65,4 +64,3 @@ private
   	 return tracks
   end
 
-end
