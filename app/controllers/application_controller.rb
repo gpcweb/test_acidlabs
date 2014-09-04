@@ -5,32 +5,41 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def confirm_service
-  	# Pregunto por cualquier cosa la idea es verificar si el servicio esta disponible
-  	  response = HTTParty.get("http://ws.spotify.com/search/1/artist?q=lorde")
-  	  if response.code != 200
-  		flash[:notice] = "Upss algo salio mal."
+  def confirm_service(r)
+      # Confirma si la respuesta de Spotify es OK
+  	  if r.code != 200
+        # Si la respuesta no es OK entonces se redirige al search
+  		  flash[:notice] = "Upss algo salio mal con Spotify."
         redirect_to(:controller => 'search', :action => 'index')
-  		return false
+  		  return false
   	  else
-  		return true
+        # Si no retorna el objeto nuevamente
+  		  return r
   	  end
+
   end
 
-  # Estos metodos pueden incluir algunas validaciones o mensajes personalizados 
-  # dependiendo del mensaje de respuesta (200, 500, 503, 403, 404, etc)
   def get_artists(q)
-  	 artistas = HTTParty.get("http://ws.spotify.com/search/1/artist.json?q=#{q}")
+     # Se envia la consulta a Spotify 
+     r = HTTParty.get("http://ws.spotify.com/search/1/artist.json?q=#{q}")
+     # Se confirma la respuesta
+  	 artistas = confirm_service(r)
   	 return artistas
   end
 
   def get_albums(q)
-  	 albums = HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=albumdetail")
+     # Se envia la consulta a Spotify
+     r = HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=albumdetail")
+     # Se confirma la respuesta
+  	 albums = confirm_service(r)
   	 return albums
   end
 
   def get_tracks(q)
-  	 tracks = HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=trackdetail")
+     # Se envia la consulta a Spotify
+     r = HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=trackdetail")
+     # Se confirma la respuesta
+  	 tracks = confirm_service(r)
   	 return tracks
   end
 
