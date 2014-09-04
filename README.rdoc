@@ -1,28 +1,68 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+La aplicacion es una prueba realizada para AcidLabs. La aplicacion debe usar API de Spotify y debe:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Poder buscar un artista desde un campo de texto contra la API de Spotify. 
+- Al seleccionar uno el programa debe guardar localmente en una Base de Datos todos los datos del artista, todos sus albums y sus respectivas canciones.
+- Poder elegir uno de los artistas ya descargados, y mostrar en una lista todos sus albumes, ordenados por año, con la popularidad promedio de sus pistas y el nombre y longitud de su pista más larga. Este requisito de debe lograr, idealmente, con una sóla consulta SQL a través de Active Record
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Este README cubre algunas cosas necesarias para poder poner en marcha la aplicacion.
+
+* Version de Ruby
+Esta aplicacion usa Ruby 4.1.4
+
+* Gemas
+Existen dos gemas importantes para poder correr la aplicacion incluidas en el Gemfile que son HTTParty y pg (si usan postgres).
+
+* Creacion base de datos
+Se debe crear la base de datos test_acidlabs_development y el usuario user_acidlabs con permisos en esa base de datos. En Mysql:
+
+CREATE DATABASE test_acidlabs_development;
+
+GRANT ALL PRIVILEGES ON test_acidlabs_development.* TO 'user_acidlabs'@'localhost' IDENTIFIED BY 'password';
+
+* Generar tablas
+Para generar las tablas,  desde cmd ir a la carpeta donde se encuentra el proyecto y desde cmd:
+
+rake db:migrate
+
+Esto debe generar tres tablas, albums, artista y pista
+
+* Finalmente desde cmd en la carpeta del proyecto rails server
+
+
+MEJORAS
+
+Como futuras mejoras se tiene en mente redefinir application_controller.rb de la siguiente manera:
+
+private
+
+  def confirm_service(response)
+
+  	  if response.code != 200
+  		flash[:notice] = "Upss algo salio mal con Spotify."
+        redirect_to(:controller => 'search', :action => 'index')
+  		return false
+  	  else
+  		return response
+  	  end
+  end
+
+ 
+  def get_artists(q)
+  	 artistas = confirm_service(HTTParty.get("http://ws.spotify.com/search/1/artist.json?q=#{q}"))
+  	 return artistas
+  end
+
+  def get_albums(q)
+  	 albums = confirm_service(HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=albumdetail"))
+  	 return albums
+  end
+
+  def get_tracks(q)
+  	 tracks = confirm_service(HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=trackdetail"))
+  	 return tracks
+  end
+
+end
