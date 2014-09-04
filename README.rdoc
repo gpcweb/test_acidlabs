@@ -31,38 +31,3 @@ Esto debe generar tres tablas, albums, artista y pista
 
 * Finalmente desde cmd en la carpeta del proyecto rails server
 
-
-MEJORAS
-
-Como futuras mejoras se tiene en mente redefinir application_controller.rb de la siguiente manera:
-
-private
-
-  def confirm_service(response)
-
-  	  if response.code != 200
-  		flash[:notice] = "Upss algo salio mal con Spotify."
-        redirect_to(:controller => 'search', :action => 'index')
-  		return false
-  	  else
-  		return response
-  	  end
-  end
-
- 
-  def get_artists(q)
-  	 artistas = confirm_service(HTTParty.get("http://ws.spotify.com/search/1/artist.json?q=#{q}"))
-  	 return artistas
-  end
-
-  def get_albums(q)
-  	 albums = confirm_service(HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=albumdetail"))
-  	 return albums
-  end
-
-  def get_tracks(q)
-  	 tracks = confirm_service(HTTParty.get("http://ws.spotify.com/lookup/1/.json?uri=#{q}&extras=trackdetail"))
-  	 return tracks
-  end
-
-end
