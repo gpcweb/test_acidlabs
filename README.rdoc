@@ -31,3 +31,4 @@ Esto debe generar tres tablas, albums, artista y pista
 
 * Finalmente desde cmd en la carpeta del proyecto rails server
 
+
