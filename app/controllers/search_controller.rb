@@ -2,8 +2,6 @@ class SearchController < ApplicationController
 
   layout 'admin'
   
-  # Antes de que cualquier accion se ejecute confirmar si el servicio esta disponible, excepto cuando cargamos el index
-  before_action :confirm_service, :except => [:index]
 
   def index
   	
