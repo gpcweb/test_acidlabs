@@ -1,11 +1,19 @@
-<% @page_title = "Menu" %>
-
-<div class="menu">
-  <ul>
-    <li>Bievenido </li>
-    <li><%= link_to("Buscar en Spotify", :controller => 'search',:action => 'index') %></li>
-    <li><%= link_to("Ver todos los Artistas", :controller => 'artista', :action => 'index') %></li>
-    <li><%= link_to("Ver todos los Albums", :controller => 'album', :action => 'index') %></li>
-
-  </ul>
+<div class="row">
+    	<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="glyphicon glyphicon-arrow-down"></span>
+                  MENU
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav">
+                    <li><%= link_to("Buscar", :controller => 'search',:action => 'index') %></li>
+                    <li><%= link_to("Artistas", :controller => 'artista', :action => 'index') %></li>
+                    <li><%= link_to("Albums", :controller => 'album', :action => 'index') %></li>
+                    <li> <a>Canciones</a></li> 	
+                </ul> 
+            </div>
+         </nav> 
 </div>

@@ -21,6 +21,8 @@ class ApplicationController < ActionController::Base
 
   def get_artists(q)
      # Se envia la consulta a Spotify 
+
+     q.gsub!(/\s+/, "+")
      r = HTTParty.get("http://ws.spotify.com/search/1/artist.json?q=#{q}")
      # Se confirma la respuesta
   	 artistas = confirm_service(r)

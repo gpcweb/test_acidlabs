@@ -1,26 +1,32 @@
-<div class="artista index">
+<div class="row">
+
   <h2>Listado de Albums</h2>
 
-  <table class="listing" summary="Lista de Albums">
-    <tr class="header">
-      <th>&nbsp;</th>
-      <th>Artista</th>
-      <th>Album</th>
-      <th>Año</th>
-      <th>Popularidad Promedio Pistas</th>
-      <th>Pistas Mas Larga</th>
-      <th>URI</th>
-    </tr>
-    <% @albums.each do |album| %>
-    <tr class="<%= cycle('odd', 'even') %>">
-      <td><%=  album.id %></td>
-      <td><%=  album.artista.nombre %></td>
-      <td><%=  album.nombre %></td>
-      <td><%=  album.anio %></td>
-      <td><%=  number_with_precision(album.pistas.average('popularidad'), precision: 2) %></td>
-      <td><%=  album.pistas.maximum('duracion') %></td>
-      <td><%=  album.uri %></td>
-    </tr>
-    <% end %>
-  </table>
+  <div class="table.responsive">
+
+      <table class="table table-hover" summary="Lista de Albums">
+        <tr class="header">
+          <th>&nbsp;</th>
+          <th>Artista</th>
+          <th>Album</th>
+          <th>Año</th>
+          <th>Popularidad Promedio Pistas</th>
+          <th>Pistas Mas Larga</th>
+          <th>URI</th>
+        </tr>
+        <% @albums.each do |album| %>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td><%=  album.id %></td>
+          <td><%=  album.artista.nombre %></td>
+          <td><%=  album.nombre %></td>
+          <td><%=  album.anio %></td>
+          <td><%=  number_with_precision(album.pistas.average('popularidad'), precision: 2) %></td>
+          <td><%=  album.pistas.maximum('duracion') %></td>
+          <td><%=  album.uri %></td>
+        </tr>
+        <% end %>
+      </table>
+
+  </div>
+  
 </div>

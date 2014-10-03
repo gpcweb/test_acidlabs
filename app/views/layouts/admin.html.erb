@@ -7,25 +7,32 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="header">
-      <h1>Spotify</h1>
-    </div>
-    <div id="main">
+  <div class="container">
 
-      <% if !flash[:notice].blank? %>
-        <div class="notice">
-          <%= flash[:notice] %>
-        </div>
-      <% end %>
+      <header class="row">
+         
+      </header>
+       
+      <%= render(:partial => "application/menu") %>  
       
-      <%= render(:partial => "application/menu") %> 
 
-      <div id="content">
-        <%= yield %>
+      <div class="row">
+          <% if !flash[:notice].blank? %>
+            <div class="alert alert-success" role="alert">
+              <%= flash[:notice] %>
+            </div>
+          <% end %>    
       </div>
-    </div>
-    <div id="footer">
-      <p id="copyright">&copy; https://github.com/gpcweb / Gabriel Poblete</p>
-    </div>
+
+      <%= yield %>
+
+      <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+          <div class="container">
+            </br>
+            <p class="text-center"> Gabriel Poblete / https://github.com/gpcweb </p> 
+          </div>
+      </nav>
+  </div>    
+
   </body>
 </html>
