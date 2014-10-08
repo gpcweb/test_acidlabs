@@ -12,5 +12,6 @@ class AlbumController < ApplicationController
 
 	def album_byartist
 		@albums = Album.where("artista_id=#{params[:id]}").order("anio DESC")
+		render('index')
 	end
 end
